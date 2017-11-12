@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include "Colour.h"
 
 template<Colour C>
 class QwintoRow {
