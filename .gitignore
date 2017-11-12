@@ -1,0 +1,5 @@
+#Visual Studio Files
+[Dd]ebug/
+*.vcxproj
+*.vcxproj.filters
+*.filters
