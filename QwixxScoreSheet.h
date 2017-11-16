@@ -12,9 +12,12 @@
 
 //QwixxScoresheet Class
 class QwixxScoreSheet: public ScoreSheet{
-    QwixxRow<int,Colour::RED> red;
-    QwixxRow<int,Colour::BLUE> blue;
-    QwixxRow<int,Colour::GREEN> green;
+    QwixxRow<Dice,Colour::RED> red;
+    QwixxRow<Dice,Colour::BLUE> blue;
+    QwixxRow<Dice,Colour::GREEN> green;
+    QwixxRow<Dice,Colour::WHITE> WHITE;
+
+    
 public:
     virtual bool score(RollOfDice&, Colour newColor, int =-1);
     virtual void setTotal();
