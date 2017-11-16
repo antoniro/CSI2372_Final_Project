@@ -26,21 +26,7 @@ using std::array;
 
 
 //Scoresheet Class definition
-class Scoresheet {
-public: string name;
 
-
-public:
-	Scoresheet(string name);
-
-	virtual bool score(vector<Dice>, Dice::Colour newColor, int position) = 0;
-
-	ostream & print(ostream & toStream);
-
-
-	~Scoresheet();
-
-};
 class QwintScoreSheet : public Scoresheet {};
 
 class QwixxScoreSheet : public Scoresheet {};
