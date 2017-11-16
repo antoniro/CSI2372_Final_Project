@@ -10,7 +10,7 @@ class QwintoRow {
 public:
 	bool validate();
 	int& operator[] (cont int&);
-	friend std::ostream& operator<<(std::ostream&, const QwintoRow<Colour C>&);
+	friend std::ostream& operator<<(std::ostream&, const QwintoRow<C>&);
 
 private:
 	int invalidIndex;
@@ -19,4 +19,4 @@ private:
 };
 
 template<Colour C>
-std::ostream& operator<<(std::ostream&, const QwintoRow<Colour C>&);
+std::ostream& operator<<(std::ostream&, const QwintoRow<C>&);
