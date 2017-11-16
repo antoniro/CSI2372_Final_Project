@@ -1,14 +1,22 @@
 #pragma once
 
 #include <array>
+#include <vector>
+#include <iostream>
 #include "Colour.h"
 
 template<Colour C>
 class QwintoRow {
 public:
-	int& operator[] (cont int i);
 	bool validate();
+	int& operator[] (cont int&);
+	friend std::ostream& operator<<(std::ostream&, const QwintoRow<Colour C>&);
 
 private:
-	std::array<string, 10> row;
+	int invalidIndex;
+	std::vector<int> bonusIndex;
+	std::array<int, 10> row;
 };
+
+template<Colour C>
+std::ostream& operator<<(std::ostream&, const QwintoRow<Colour C>&);

@@ -11,6 +11,7 @@ public:
 	RollOfDice *begin();			// Overload begin() member function for use with range-based for loops
 	RollOfDice *end();				// Overload end() menber function for use with range-based for loops
 	operator int() const;			// Overload conversion operator to int
+	friend std::ostream& operator<<(std::ostream&, const RollOfDice&);
 
 private:
 	std::vector<Dice> diceRoll;
