@@ -42,8 +42,18 @@ void RollOfDice::removeAllDice(){
     }
 }
 
-void RollOfDice::addDice(Dice newDice){
-    if(diceRoll.size()<diceRoll.capacity()){
+void RollOfDice::addDice(Dice & newDice){
+    if(diceRoll.size()<sizeReserved){
         diceRoll.push_back(newDice);
     }else { /* do nothing */}
 }
+
+std::vector<Dice> RollOfDice::pair(Dice & white, Dice & dummy){
+    //sizeReserved=2;
+    addDice(white);
+    addDice(dummy);
+    roll();
+    
+    return diceRoll;
+}
+
