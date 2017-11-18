@@ -8,15 +8,17 @@
 #define Player_h
 
 #pragma once
+
 #include "RollOfDice.h"
 #include <string>
 
 class Player {
+public:
+	virtual void inputBeforeRoll(RollOfDice& const) = 0;
+	virtual void inputAfterRole(RollOfDice& const) = 0;
+
+private:
     bool active;
-    std::string playerName;
-    
-public: virtual void inputBeforeRoll(RollOfDice & );
-    virtual void inputAfterRole(RollOfDice & );
 };
 
 
