@@ -10,15 +10,19 @@
 #ifndef QwixxPlayer_h
 #define QwixxPlayer_h
 
-
 #pragma once
+
 #include "RollOfDice.h"
 #include "Player.h"
+#include "QwixxScoreSheet.h"
 
 class QwixxPlayer : public Player {
 public:
-    void inputBeforeRoll( RollOfDice &);
-    void inputAfterRole( RollOfDice &);
+	void inputBeforeRoll(RollOfDice& const) override;
+	void inputAfterRole(RollOfDice& const) override;
+
+private:
+	QwixxScoreSheet scoreSheet;
 };
 
 #endif /* QwixxPlayer_h */
