@@ -10,11 +10,6 @@ struct RandomDice {
 	static std::uniform_int_distribution<int> distr;
 };
 
-//Initialize static members of the struct RandomDice
-std::random_device RandomDice::rDevice;
-std::mt19937 RandomDice::generator(RandomDice::rDevice());
-std::uniform_int_distribution<int> RandomDice::distr(1, 6);
-
 struct Dice {
 	Colour const colour;
 	int face;
@@ -22,4 +17,4 @@ struct Dice {
 	Dice(Colour const);
 };
 
-std::ostream& operator<<(std::ostream&, Dice& const);		// Overload insertion operator for printing a Dice to an output stream
+std::ostream& operator<<(std::ostream&, Dice const&);		// Overload insertion operator for printing a Dice to an output stream
