@@ -16,9 +16,10 @@ std::mt19937 RandomDice::generator(RandomDice::rDevice());
 std::uniform_int_distribution<int> RandomDice::distr(1, 6);
 
 struct Dice {
-	const Colour colour;
+	Colour const colour;
 	int face;
 	int roll();
+	Dice(Colour const);
 };
 
-std::ostream& operator<<(std::ostream&, const Dice&);		// Overload insertion operator for printing a Dice to an output stream
+std::ostream& operator<<(std::ostream&, Dice& const);		// Overload insertion operator for printing a Dice to an output stream
