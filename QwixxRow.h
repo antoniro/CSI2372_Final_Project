@@ -3,15 +3,15 @@
 #include <array>
 #include "Colour.h"
 
-template<class T, Colour C>
+template<class T, Colour const C>
 class QwixxRow {
 public:
-	QwixxRow& operator+=(const QwixxRow&);
-	friend std::ostream& operator<<(std::ostream&, const QwixxRow<T, C>&);
+	QwixxRow& operator+=(QwixxRow& const);
+	friend std::ostream& operator<<(std::ostream&, QwixxRow<T, C>& const);
 
 private:
-	int std::array<int, 12> row;
+	T row;
 };
 
-template<class T, Colour C>
-std::ostream& operator<<(std::ostream&, const QwixxRow<T, C>&);
+template<class T, Colour const C>
+std::ostream& operator<<(std::ostream&, QwixxRow<T, C>& const);
