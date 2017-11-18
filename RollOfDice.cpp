@@ -14,12 +14,12 @@ void RollOfDice::addDice(Dice & dice)
 
 void RollOfDice::removeAllDice()
 {
-	diceRoll.clear;
+	diceRoll.clear();
 }
 
 void RollOfDice::roll()
 {
-	for (Dice d : diceRoll) {
+	for (Dice &d : diceRoll) {
 		d.roll();
 	}
 }
@@ -56,7 +56,7 @@ std::vector<Dice>::const_iterator RollOfDice::end() const
 
 RollOfDice::operator int() const
 {
-	int result;
+	int result = 0;
 	for (auto d : diceRoll) {
 		result += d.face;
 	}
@@ -64,7 +64,8 @@ RollOfDice::operator int() const
 	return result;
 }
 
-std::ostream & operator<<(std::ostream &, RollOfDice & const)
+std::ostream & operator<<(std::ostream & os, RollOfDice const & rd)
 {
-	// TODO: insert return statement here
+	// TODO: insert code here
+	return os;
 }

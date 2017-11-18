@@ -26,12 +26,12 @@ public:
 	// Overload conversion operator to int
     operator int() const;
 
-    friend std::ostream& operator<<(std::ostream&, RollOfDice& const);
+    friend std::ostream& operator<<(std::ostream&, RollOfDice const&);
 
 private:
     std::vector<Dice> diceRoll;
 };
 
-std::ostream& operator<<(std::ostream&, RollOfDice& const);	// Overload insertion operator for printing a RollOfDice to an output stream
+std::ostream& operator<<(std::ostream&, RollOfDice const&);	// Overload insertion operator for printing a RollOfDice to an output stream
 
 #endif /* RollOfDice_h */
