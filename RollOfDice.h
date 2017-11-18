@@ -1,10 +1,3 @@
-//
-//  RollOfDice.h
-//  FProject
-//
-//  Created by Arthur Mbouche on 2017-11-16.
-//  Copyright © 2017 Arthur Mbouche. All rights reserved.
-//
 
 #ifndef RollOfDice_h
 #define RollOfDice_h
@@ -16,22 +9,29 @@
 #include "Dice.h"
 
 class RollOfDice {
-public:
-    int sizeReserved;
-    RollOfDice(int nDice);
-    void roll();
-    void removeAllDice();
-    void addDice(Dice & newDice);
-    std::vector<Dice> pair(Dice & white, Dice & random);
-    RollOfDice *begin() const;	// Overload begin() member function for use with range-based for loops
-    RollOfDice *end() const;		// Overload end() menber function for use with range-based for loops
-    operator int() const;			// Overload conversion operator to int
-    friend std::ostream& operator<<(std::ostream&,const RollOfDice&);
-    
+public:    
+    void addDice(Dice&);
+	void removeAllDice();
+	void roll();   
+    RollOfDice pair(Dice&);
+
+	// Overload begin() member function for use with range-based for loops
+    std::vector<Dice>::iterator begin();
+	std::vector<Dice>::const_iterator begin() const;
+
+	// Overload end() menber function for use with range-based for loops
+    std::vector<Dice>::iterator end();
+	std::vector<Dice>::const_iterator end() const;
+
+	// Overload conversion operator to int
+    operator int() const;
+
+    friend std::ostream& operator<<(std::ostream&, RollOfDice& const);
+
 private:
     std::vector<Dice> diceRoll;
 };
 
-std::ostream& operator<<(std::ostream&, const RollOfDice&);	// Overload insertion operator for printing a RollOfDice to an output stream
+std::ostream& operator<<(std::ostream&, RollOfDice& const);	// Overload insertion operator for printing a RollOfDice to an output stream
 
 #endif /* RollOfDice_h */
