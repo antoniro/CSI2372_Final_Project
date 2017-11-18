@@ -4,6 +4,7 @@
 int Dice::roll()
 {
 	face = RandomDice::distr(RandomDice::generator);
+	return face;
 }
 
 Dice::Dice(Colour const col) : colour{col}
