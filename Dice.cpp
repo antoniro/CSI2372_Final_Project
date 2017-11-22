@@ -1,23 +1,22 @@
-//
-//  Dice.cpp
-//  FProject
-//
-//  Created by Arthur Mbouche on 2017-11-16.
-//  Copyright © 2017 Arthur Mbouche. All rights reserved.
-//
-
-#include <stdio.h>
 #include "Dice.h"
 
+//Initialize static members of the struct RandomDice
+std::random_device RandomDice::rDevice;
+std::mt19937 RandomDice::generator(RandomDice::rDevice());
+std::uniform_int_distribution<int> RandomDice::distr(1, 6);
 
-int Dice::roll(){
-    
-    face= forRoll.random_value();  // generates random values 1 to 6
-    return face;
+int Dice::roll()
+{
+	face = RandomDice::distr(RandomDice::generator);
+	return face;
 }
 
-std::ostream& operator<<(std::ostream & os , Dice & newDice){
-    
-    os << newDice.face << "\t";
-    return os;
+Dice::Dice(Colour const col) : colour{col}
+{
+}
+
+std::ostream & operator<<(std::ostream & os, Dice const & dice)
+{
+	os << dice.face;
+	return os;
 }

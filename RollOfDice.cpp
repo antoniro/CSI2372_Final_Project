@@ -7,53 +7,65 @@
 #include <stdio.h>
 #include "RollOfDice.h"
 
-void RollOfDice::roll(){
-    //int add;
-    for(Dice d: diceRoll){
-        std::cout<<d.roll()<< " ";
-    }
-}
-//to be reconsidered as instructions are not clear
-RollOfDice::operator int() const{
-    int add=0;
-    for(Dice d: diceRoll){
-        add+=d.face;
-        }
-    return add;
+void RollOfDice::addDice(Dice & dice)
+{
+	diceRoll.push_back(dice);
 }
 
-std::ostream& operator<<(std::ostream& os, const RollOfDice & rDice){
-    
-    for(Dice d: rDice.diceRoll){
-        os<<d.face<< " ";
-    }
-    return os;
+void RollOfDice::removeAllDice()
+{
+	diceRoll.clear();
 }
 
-RollOfDice::RollOfDice(int numberOfDice){
-  
-    diceRoll.reserve(numberOfDice); //get input from user and reserve a given size for roll
+void RollOfDice::roll()
+{
+	for (Dice &d : diceRoll) {
+		d.roll();
+	}
 }
 
-void RollOfDice::removeAllDice(){
-    
-    while(! diceRoll.empty()){
-        diceRoll.pop_back();
-    }
+RollOfDice RollOfDice::pair(Dice & d)
+{
+	RollOfDice r;
+	Dice w(Colour::WHITE);
+	w.roll();
+	r.addDice(d);
+	r.addDice(w);
+	return r;
 }
 
-void RollOfDice::addDice(Dice & newDice){
-    if(diceRoll.size()<sizeReserved){
-        diceRoll.push_back(newDice);
-    }else { /* do nothing */}
+std::vector<Dice>::iterator RollOfDice::begin()
+{
+	return diceRoll.begin();
 }
 
-std::vector<Dice> RollOfDice::pair(Dice & white, Dice & dummy){
-    //sizeReserved=2;
-    addDice(white);
-    addDice(dummy);
-    roll();
-    
-    return diceRoll;
+std::vector<Dice>::const_iterator RollOfDice::begin() const
+{
+	return diceRoll.begin();;
 }
 
+std::vector<Dice>::iterator RollOfDice::end()
+{
+	return diceRoll.end();
+}
+
+std::vector<Dice>::const_iterator RollOfDice::end() const
+{
+	return diceRoll.end();
+}
+
+RollOfDice::operator int() const
+{
+	int result = 0;
+	for (auto d : diceRoll) {
+		result += d.face;
+	}
+
+	return result;
+}
+
+std::ostream & operator<<(std::ostream & os, RollOfDice const & rd)
+{
+	// TODO: insert code here
+	return os;
+}

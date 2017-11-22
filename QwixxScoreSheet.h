@@ -7,27 +7,31 @@
 #ifndef QwixxScoreSheet_h
 #define QwixxScoreSheet_h
 
+#pragma once
+
+#include <vector>
+#include <list>
 #include "ScoreSheet.h"
 #include "QwixxRow.h"
 
-//QwixxScoresheet Class
 class QwixxScoreSheet: public ScoreSheet{
-    QwixxRow<Dice,Colour::RED> red;
-    QwixxRow<Dice,Colour::BLUE> blue;
-    QwixxRow<Dice,Colour::GREEN> green;
-    QwixxRow<Dice,Colour::WHITE> WHITE;
-
-    
 public:
-    virtual bool score(RollOfDice&, Colour newColor, int =-1);
-    virtual void setTotal();
-    virtual bool operator!() const;
-    virtual std::ostream & print(std::ostream & toStream);
-    ~QwixxScoreSheet();
-    
+	bool score(RollOfDice& const, Colour const, int = -1) override;
+	void setTotal() override;
+	bool operator!() const override;
+	friend std::ostream& operator<<(std::ostream&, QwixxScoreSheet& const);
+
 protected:
-    virtual bool validate();
-    virtual int calcTotal();
+	virtual bool validate() override;
+	virtual int calcTotal() override;
+
+private:
+	QwixxRow<std::vector<int>, Colour::RED> red;
+	QwixxRow<std::vector<int>, Colour::YELLOW> yellow;
+	QwixxRow<std::list<int>, Colour::GREEN> green;
+	QwixxRow<std::list<int>, Colour::BLUE> blue;
 };
+
+std::ostream& operator<<(std::ostream&, QwixxScoreSheet& const);
 
 #endif /* QwixxScoreSheet_h */
