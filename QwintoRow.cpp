@@ -32,10 +32,8 @@ template<Colour C>
 std::ostream& operator<<(std::ostream& os, const QwintoRow<C> & qRow ){
   
     for(int s=0; s< qRow.row.max_size(); s++){
-        os<< qRow[s] << "| ";
+        os<< qRow.row[s] << "| ";
     }
-    
-    
     return os;
 }
 
