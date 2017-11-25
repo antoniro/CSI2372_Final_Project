@@ -3,31 +3,46 @@
 //  FProject
 //
 
+#pragma once
 #ifndef QwintoScoreSheet_h
 #define QwintoScoreSheet_h
 
-#pragma once
 
-#include "QwintoRow.h"
 #include "ScoreSheet.h"
 
-class QwintoScoreSheet: public ScoreSheet{  
+//QwintoScoresheet Class
+class QwintoScoreSheet: public ScoreSheet{
+public:   QwintoRow<Colour::RED> red;
+    QwintoRow<Colour::BLUE> blue;
+    QwintoRow<Colour::YELLOW> yellow;
 public:
-	bool score(RollOfDice& const, Colour const, int = -1) override;
-	void setTotal() override;
-	bool operator!() const override;
-	friend std::ostream& operator<<(std::ostream&, QwintoScoreSheet& const);
+   // using ScoreSheet::ScoreSheet;
+   QwintoScoreSheet(std::string name);
+    virtual void setTotal() override;
+    virtual bool operator!() const override;
+    std::ostream & print(std::ostream &) ;
+    
+    virtual bool score(RollOfDice& , Colour &, int =-1) override;
+    friend std::ostream& operator<<(std::ostream&, const ScoreSheet&);
+    
+    std::ostream & printCount(std::ostream &) const;
     
 protected:
-    virtual bool validate() override;
+    
     virtual int calcTotal() override;
+   virtual bool validate(Colour  & a, int & valid) override;
+    int tally;
+    int redTally;
+    int yellowTally;
+    int blueTally;
+    bool detCol;
+    int finalTotal;
+    
 
-private:
-	QwintoRow<Colour::RED> red;
-	QwintoRow<Colour::YELLOW> yellow;
-	QwintoRow<Colour::BLUE> blue;
 };
 
-std::ostream& operator<<(std::ostream&, QwintoScoreSheet& const);
+std::ostream& operator<<(std::ostream&, const QwintoScoreSheet&);
+
+
 
 #endif /* QwintoScoreSheet_h */
