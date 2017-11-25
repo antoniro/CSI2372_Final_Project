@@ -2,14 +2,9 @@
 //  QwintoPlayer.h
 //  FProject
 //
-//  Created by Arthur Mbouche on 2017-11-16.
-//  Copyright © 2017 Arthur Mbouche. All rights reserved.
-//
-
+#pragma once
 #ifndef QwintoPlayer_h
 #define QwintoPlayer_h
-
-#pragma once
 
 #include "RollOfDice.h"
 #include "Player.h"
@@ -17,11 +12,14 @@
 
 class QwintoPlayer : public Player {
 public:
-    void inputBeforeRoll(RollOfDice& const) override;
-    void inputAfterRole(RollOfDice& const) override;
-
-private:
-	QwintoScoreSheet scoreSheet;
+    virtual void inputBeforeRoll( RollOfDice &) override;
+    void inputAfterRoll( RollOfDice &) override;
+    QwintoPlayer(std::string);
+    //ScoreSheet& getScoreSheet(){ return scoreSheet;}
+public:
+    QwintoScoreSheet scoreSheet;
+    
+   
 };
 
 #endif /* QwintoPlayer_h */
