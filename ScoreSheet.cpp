@@ -21,7 +21,7 @@ bool ScoreSheet::score(RollOfDice& , Colour & b, int z){
     return validate(b,z);
 }
 
-
+//incomplete function
 bool ScoreSheet::operator!() const{
     if (failCount==4) return true;
     return false;
