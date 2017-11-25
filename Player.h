@@ -3,23 +3,25 @@
 //  FProject
 //
 
-
+#pragma once
 #ifndef Player_h
 #define Player_h
 
-#pragma once
 
 #include "RollOfDice.h"
 #include <string>
 
+
 class Player {
-public:
-	virtual void inputBeforeRoll(RollOfDice& const) = 0;
-	virtual void inputAfterRole(RollOfDice& const) = 0;
-
-private:
+    
+public: virtual void inputBeforeRoll(RollOfDice&) = 0;
+        virtual void inputAfterRoll( RollOfDice& ) = 0;
+    Player();
+    ~ Player()=default;
+    
+protected:
     bool active;
+    int nOfDice;  
 };
-
 
 #endif /* Player_h */
