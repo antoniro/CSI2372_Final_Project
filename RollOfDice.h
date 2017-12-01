@@ -1,4 +1,3 @@
-
 #ifndef RollOfDice_h
 #define RollOfDice_h
 
@@ -9,25 +8,27 @@
 #include "Dice.h"
 
 class RollOfDice {
-public:    
+public:
     void addDice(Dice&);
-	void removeAllDice();
-	void roll();   
+    void removeAllDice();
+    void roll();
     RollOfDice pair(Dice&);
+    int  publicNumber();
 
-	// Overload begin() member function for use with range-based for loops
+    // Overload begin() member function for use with range-based for loops
     std::vector<Dice>::iterator begin();
-	std::vector<Dice>::const_iterator begin() const;
-
-	// Overload end() menber function for use with range-based for loops
+    std::vector<Dice>::const_iterator begin() const;
+    
+    // Overload end() menber function for use with range-based for loops
     std::vector<Dice>::iterator end();
-	std::vector<Dice>::const_iterator end() const;
-
-	// Overload conversion operator to int
-    operator int() const;
-
+    std::vector<Dice>::const_iterator end() const;
+    
+    // Overload conversion operator to int
+     operator int () const ;
+     Dice getDiceAtI( const int );
+    
     friend std::ostream& operator<<(std::ostream&, RollOfDice const&);
-
+    
 private:
     std::vector<Dice> diceRoll;
 };
