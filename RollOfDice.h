@@ -11,23 +11,25 @@ class RollOfDice {
 public:
     void addDice(Dice&);
     void removeAllDice();
+   Dice  removeDice(int );
     void roll();
     RollOfDice pair(Dice&);
     int  publicNumber();
 
     // Overload begin() member function for use with range-based for loops
     std::vector<Dice>::iterator begin();
-    std::vector<Dice>::const_iterator begin() const;
+    std::vector<Dice>::const_iterator cbegin() const;
     
     // Overload end() menber function for use with range-based for loops
     std::vector<Dice>::iterator end();
-    std::vector<Dice>::const_iterator end() const;
+    std::vector<Dice>::const_iterator cend() const;
     
     // Overload conversion operator to int
      operator int () const ;
      Dice getDiceAtI( const int );
     
-    friend std::ostream& operator<<(std::ostream&, RollOfDice const&);
+    friend std::ostream& operator<<(std::ostream&,  RollOfDice &) ;
+   static void TEST_QWINTOROW();
     
 private:
     std::vector<Dice> diceRoll;

@@ -38,7 +38,7 @@ std::vector<Dice>::iterator RollOfDice::begin()
     return diceRoll.begin();
 }
 
-std::vector<Dice>::const_iterator RollOfDice::begin() const
+std::vector<Dice>::const_iterator RollOfDice::cbegin() const
 {
     return diceRoll.begin();;
 }
@@ -48,7 +48,7 @@ std::vector<Dice>::iterator RollOfDice::end()
     return diceRoll.end();
 }
 
-std::vector<Dice>::const_iterator RollOfDice::end() const
+std::vector<Dice>::const_iterator RollOfDice::cend() const
 {
     return diceRoll.end();
 }
@@ -63,7 +63,7 @@ RollOfDice::operator int() const
     return result;
 }
 
-std::ostream & operator<<(std::ostream & os, RollOfDice const & rd)
+std::ostream & operator<<(std::ostream & os, RollOfDice & rd)
 {
     // TODO: insert code here
     std::cout<<"\n you rolled ";
@@ -106,9 +106,34 @@ int  RollOfDice::publicNumber(){
 
 Dice RollOfDice::getDiceAtI(const int index){
     
-    // auto it= std::find(begin(),end(),index);
-    Dice find = diceRoll[index];
+    
+    Dice const find = diceRoll[index];
+   // auto it= std::find(cbegin(),cend(),find);
     //int diceFace= find.face;
     
     return find;
+}
+
+Dice  RollOfDice::removeDice(int diceIndex){
+    Dice const  find = diceRoll[diceIndex];
+    diceRoll.erase(cbegin()+(diceIndex));
+    return find;
+}
+
+ void RollOfDice::TEST_QWINTOROW(){
+    std::cout<<"Testing RollOfDice.cpp \n";
+    Dice blue(Colour::BLUE);
+    Dice green(Colour::GREEN);
+    Dice red(Colour::RED);
+    RollOfDice rd; 
+    rd.addDice(blue);
+    rd.addDice(green);
+    rd.addDice(red);
+    std::cout<<"Added 3 dices, now rolling \n";
+    rd.roll();
+    std::cout<<rd;
+    std::cout<<"\n Removing  middle dice ";
+    rd.removeDice(1);
+    std::cout<<rd;
+    //rd.roll();
 }
