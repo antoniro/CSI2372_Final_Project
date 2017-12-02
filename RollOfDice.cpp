@@ -120,7 +120,7 @@ Dice  RollOfDice::removeDice(int diceIndex){
     return find;
 }
 
- void RollOfDice::TEST_QWINTOROW(){
+ void RollOfDice::TEST_ROLLOFDICE(){
     std::cout<<"Testing RollOfDice.cpp \n";
     Dice blue(Colour::BLUE);
     Dice green(Colour::GREEN);

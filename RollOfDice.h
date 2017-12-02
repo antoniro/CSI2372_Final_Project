@@ -29,7 +29,7 @@ public:
      Dice getDiceAtI( const int );
     
     friend std::ostream& operator<<(std::ostream&,  RollOfDice &) ;
-   static void TEST_QWINTOROW();
+   static void TEST_ROLLOFDICE();
     
 private:
     std::vector<Dice> diceRoll;
