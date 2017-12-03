@@ -18,8 +18,6 @@ template< class T, Colour C>
 class QwixxRow {
 protected:
     T row;
-  //  RollOfDice rD;
-    
 public:
     QwixxRow<T,C>();
    
@@ -31,9 +29,9 @@ public:
     void initialize();
     QwixxRow<T,C>& operator+=(const QwixxRow&);
     int& operator[] (const int&);
-    //template<typename Z, Colour D>
+    
     friend std::ostream& operator<<(std::ostream& os, QwixxRow<T,C>& qRow)
-    {
+        {
         os<<std::setw(2)<< " | ";
         for ( auto current = qRow.row.begin(); current != qRow.row.end(); ++ current ) {
             if(*current==-1){
@@ -41,8 +39,8 @@ public:
             }
             else{
                 os<<std::setw(2)<<  *current <<"| ";
-            }
-        }
+                }
+         }
      // if last index is crossed lock row
        if(*(--qRow.row.end())== -1){
           os<<"L";
@@ -63,36 +61,25 @@ protected:
 template <class T,Colour C>
 void QwixxRow<T,C>::initialize(){
     for(int z=2; z<13;z++){
-       // std::cout<<"red push";
         row.push_back(z);
     }
-    
 }
 
 template <class T,Colour C>
 void QwixxRow<T,C>::rInitialize(){
     for(int z=12; z>1;z--){
         row.push_back(z);
-      //  std::cout<<"blue push";
-    }
-    
-}
+    }}
 
 
 template <class T,Colour C>
 QwixxRow<T,C>::QwixxRow(): index(2),rIndex(12){
-    
     switch(C){
         case Colour::RED:
             initialize();
-           // std::cout<<*row.begin()<<std::endl;
-           // std::cout<<*row.end()<<std::endl;
             break;
         case Colour::BLUE:
             rInitialize();
-          //  std::cout<<*row.begin()<<std::endl;
-           // std::cout<<*row.end()<<std::endl;
- 
             break;
         case Colour::GREEN:
             rInitialize();
@@ -104,9 +91,9 @@ QwixxRow<T,C>::QwixxRow(): index(2),rIndex(12){
     }
 }
 
+//This deals with the yellow and red rows. and inserts either -1(XX) or the roll scored in appropriate index
 template<class T,Colour C>
 bool QwixxRow<T,C>::loopRY(int & forLoop){
-    // int loop=0;
     bool type=false;
     try{
         if(forLoop==1) throw std::out_of_range("index is out of range");
@@ -114,47 +101,32 @@ bool QwixxRow<T,C>::loopRY(int & forLoop){
         std::cout << "OUT OF RANGE" << outofrange.what();
     }
     for ( auto current = row.begin(); current != row.end(); ++ current ) {
-     //   std::cout<<*current<<std::endl;
         if( (*current)==forLoop){
             if((++current)!=row.end()){
                 if(*current==-1){
-                    //throw std::out_of_range("This is an invalid place for entry");
-                    std::cout<<"reached here current =-1 true \n";
                     type= false;}
-                
-                if((*(current)+1 > forLoop)){
-                    //  throw std::out_of_range("Roll cannot be scored in this position ");
-                    std::cout<<"validated \n";
-                    std::cout<<*(current)<<std::endl;
+                    if((*(current)+1 > forLoop)){
                     type= true;
                     break;
-                }else{
+                    }else{
                     type= false;
-                    std::cout<<"cannot score here \n";
-                    std::cout<<"\n";
-                    std::cout<<*(--current )<<" ";
-                    std::cout<<*(current)<<" ";
-                    std::cout<<*(++current);
                     break;
                 }}
             else{
                 --current;
                 if(*current==-1){
-                    //throw std::out_of_range("This is an invalid place for entry");
                     std::cout<<"row locked L \n";
                     type= false;}
                 else{
                     type=true;}}
+                }
         }
-    }
     return type;
 }
 
 
 template<class T,Colour C>
 bool QwixxRow<T,C>::loopBG(int & forLoop){
-    // int loop=12;
-    // auto c=row.begin();   
     bool type=false;
     try{
         if(forLoop==1) throw std::out_of_range("index is out of range");
@@ -163,37 +135,27 @@ bool QwixxRow<T,C>::loopBG(int & forLoop){
         
     }
     for ( auto current = row.begin(); current != row.end(); ++ current ) {
-       // std::cout<<*current<<std::endl;
         if( *current == forLoop){
             if((++current)!=row.end()){
-              //  --current;
                 if(*current==-1){
-                    //throw std::out_of_range("This is an invalid place for entry");
-                    type= false;}
-                
-                if((*(current)+1 < forLoop)){
-                    // if next value is less than roll
-                    // std::cout<<"cannot score here \n";
-                    type= false;}else{
+                    type= false;
+                        }
+                    if((*(current)+1 < forLoop)){
+                        type= false;}
+                    else{
                         type= true;
-                        break;
-                    }
-            }
-            else{
-                --current;
-                if(*current==-1){
-                    
-                    //throw std::out_of_range("This is an invalid place for entry");
-                    std::cout<<"row locked L \n";
-                    type= false;}
+                        break; }}
                 else{
+                        --current;
+                        if(*current==-1){
+                                std::cout<<"row locked L \n";
+                            type= false;}
+                        else{
                     type=true;}}
-        }}
-    std::cout<<"reached true \n";
+            }
+        }
     return type;
 }  
-
-
 
 template<class T,Colour C>
 bool QwixxRow<T,C>::validate(const RollOfDice& index){
@@ -224,18 +186,13 @@ QwixxRow<T,C>& QwixxRow<T,C>::operator+= (const  RollOfDice& newRoll) {
     if(validate(newRoll)){
         for ( auto current = row.begin(); current != row.end(); ++ current ) {
             if(*current==dice){
-                
                 s = row.erase(current);
                 row.insert(s,-1);  
-            }
-            else{   
-                // std::cout<<"never executes if loop operator +="<<*current<<std::endl;
+                }
+            else{   }
             }
         }
-    }  
-    else{
-        std::cout<<"never executes validate"<<std::endl;
-    }
+    else{}
     return *this;
 }
 
