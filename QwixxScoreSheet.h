@@ -3,35 +3,44 @@
 //  FProject
 //
 
-
+#pragma once
 #ifndef QwixxScoreSheet_h
 #define QwixxScoreSheet_h
 
-#pragma once
-
-#include <vector>
-#include <list>
 #include "ScoreSheet.h"
-#include "QwixxRow.h"
+#include <list>
+#include <vector>
 
+//#include "ScoreSheet.cpp"
+
+//QwixxScoresheet Class
 class QwixxScoreSheet: public ScoreSheet{
 public:
-	bool score(RollOfDice& const, Colour const, int = -1) override;
-	void setTotal() override;
-	bool operator!() const override;
-	friend std::ostream& operator<<(std::ostream&, QwixxScoreSheet& const);
-
+    QwixxRow<std::vector<int>, Colour::RED> red;
+    QwixxRow<std::vector<int>, Colour::YELLOW> yellow;
+    QwixxRow<std::list<int>, Colour::GREEN> green;
+    QwixxRow<std::list<int>, Colour::BLUE> blue;
+    
+    int lockedRow;
+    int redTally;
+    int yellowTally;  // keep track of number of dice scored in sheet for later score computation
+    int blueTally;
+    int greenTally;
+    
+public:
+    QwixxScoreSheet(std::string);
+    virtual bool score(RollOfDice&, Colour & , int =-1) override;
+    virtual void setTotal() override;
+    virtual bool operator!() const override;
+    std::ostream & print(std::ostream & toStream);
+    friend std::ostream& operator<<(std::ostream&, const QwixxScoreSheet&);
+    static void TEST_QWIXXSCORESHEET();
+    
 protected:
-	virtual bool validate() override;
-	virtual int calcTotal() override;
+    virtual bool validate(Colour & , RollOfDice &,int & ) override;
+    virtual int calcTotal() override;
+}; 
 
-private:
-	QwixxRow<std::vector<int>, Colour::RED> red;
-	QwixxRow<std::vector<int>, Colour::YELLOW> yellow;
-	QwixxRow<std::list<int>, Colour::GREEN> green;
-	QwixxRow<std::list<int>, Colour::BLUE> blue;
-};
-
-std::ostream& operator<<(std::ostream&, QwixxScoreSheet& const);
+std::ostream& operator<<(std::ostream& , const QwixxScoreSheet&);
 
 #endif /* QwixxScoreSheet_h */
