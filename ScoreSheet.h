@@ -24,17 +24,18 @@ public:
     int getFailCount() const{return failCount;}
     void incCount(){failCount++;}
     virtual ~ScoreSheet() = default;
+    std::string getPlayerName() const{ return playerName;}
     
 protected:
-    virtual bool validate(Colour &, int &) = 0;
+    virtual bool validate(Colour &, RollOfDice &,int & j) = 0;
     virtual int calcTotal() = 0;
    
 protected:
     std::string playerName;
     int failCount;
     int overallScore;
+    bool detCol;
 };
-
 
 std::ostream& operator<<(std::ostream&, const ScoreSheet&);
 

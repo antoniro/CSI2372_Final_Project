@@ -5,7 +5,7 @@
 #include "ScoreSheet.h"
 #include <stdio.h>
 
-ScoreSheet::ScoreSheet(std::string newName):playerName(newName),failCount(0),overallScore(0)
+ScoreSheet::ScoreSheet(std::string newName):playerName(newName),failCount(0),overallScore(0),detCol(false)
 {}
 
 
@@ -16,9 +16,9 @@ std::ostream& operator<<(std::ostream& os, const ScoreSheet& sheet){
 void ScoreSheet::setTotal(){  calcTotal(); }
 
 
-bool ScoreSheet::score(RollOfDice& , Colour & b, int z){
+bool ScoreSheet::score(RollOfDice& rd , Colour & b, int z){
     
-    return validate(b,z);
+    return validate(b,rd ,z);
 }
 
 //incomplete function
